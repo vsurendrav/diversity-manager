@@ -10,7 +10,6 @@ import org.springframework.context.annotation.ComponentScan;
 public class DiversityDimensionsApplication {
 
 	public static void main(String[] args) {
-		//System.setProperty("spring.devtools.restart.enabled", "false");
 		SpringApplication.run(DiversityDimensionsApplication.class, args);
 	}
 
