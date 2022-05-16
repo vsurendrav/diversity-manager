@@ -1,4 +1,4 @@
-package com.hackathon.diversity.dimentions.config;
+package com.hackathon.diversity.manager.config;
 
 public class DiversityDimesionsConfiguration {
 

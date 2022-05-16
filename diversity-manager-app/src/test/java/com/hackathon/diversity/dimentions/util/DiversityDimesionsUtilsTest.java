@@ -16,6 +16,8 @@ import org.mockito.Mockito;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import com.hackathon.diversity.manager.util.DiversityDimesionsUtils;
+
 @ExtendWith(MockitoExtension.class)
 @DisplayName("Diversity Dimesions Utils")
 class DiversityDimesionsUtilsTest {

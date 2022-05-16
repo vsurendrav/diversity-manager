@@ -1,4 +1,6 @@
-package com.hackathon.diversity.dimentions.util;
+package com.hackathon.diversity.manager.util;
+
+import static com.hackathon.diversity.manager.constants.DiversityDimensionConstants.NOT_FOUND;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -10,7 +12,6 @@ import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import static com.hackathon.diversity.dimentions.constants.DiversityDimensionConstants.NOT_FOUND;
 
 
 public class DiversityDimesionsUtils {

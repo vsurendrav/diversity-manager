@@ -1,4 +1,4 @@
-package com.hackathon.diversity.dimentions.controller;
+package com.hackathon.diversity.manager.controller;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.hackathon.diversity.dimentions.service.DiversityDimentionsService;
+import com.hackathon.diversity.manager.service.DiversityDimentionsService;
 
 
 

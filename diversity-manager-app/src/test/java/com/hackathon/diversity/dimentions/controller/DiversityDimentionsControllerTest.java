@@ -16,7 +16,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import com.hackathon.diversity.dimentions.service.DiversityDimentionsService;
+import com.hackathon.diversity.manager.controller.DiversityDimentionsController;
+import com.hackathon.diversity.manager.service.DiversityDimentionsService;
 
 @ExtendWith(MockitoExtension.class)
 @DisplayName("Diversity Dimesions Controller")

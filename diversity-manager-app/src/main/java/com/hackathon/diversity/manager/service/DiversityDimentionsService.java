@@ -1,6 +1,6 @@
-package com.hackathon.diversity.dimentions.service;
+package com.hackathon.diversity.manager.service;
 
-import static com.hackathon.diversity.dimentions.constants.DiversityDimensionConstants.NOT_FOUND;
+import static com.hackathon.diversity.manager.constants.DiversityDimensionConstants.NOT_FOUND;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -19,7 +19,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 import org.springframework.stereotype.Service;
 
-import com.hackathon.diversity.dimentions.util.DiversityDimesionsUtils;
+import com.hackathon.diversity.manager.util.DiversityDimesionsUtils;
 
 @Service
 public class DiversityDimentionsService {

@@ -1,4 +1,4 @@
-package com.hackathon.diversity.dimentions;
+package com.hackathon.diversity.manager;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
