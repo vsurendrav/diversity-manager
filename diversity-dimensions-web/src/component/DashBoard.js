@@ -1,7 +1,7 @@
 import React from "react";
 import autoBind from "auto-bind";
-import Header from "../Header";
-import SideBarList from "../SideBarList";
+import Header from "./Header";
+import SideBarList from "./SideBarList";
 export default class Dashboard extends React.Component {
     constructor(props) {
         super(props);
