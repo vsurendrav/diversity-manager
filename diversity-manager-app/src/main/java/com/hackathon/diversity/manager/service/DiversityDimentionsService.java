@@ -2,71 +2,87 @@ package com.hackathon.diversity.manager.service;
 
 import static com.hackathon.diversity.manager.constants.DiversityDimensionConstants.NOT_FOUND;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.nio.file.Paths;
-import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 import org.springframework.stereotype.Service;
 
+import com.hackathon.diversity.manager.constants.DiversityDimensionConstants;
 import com.hackathon.diversity.manager.util.DiversityDimesionsUtils;
 
 @Service
 public class DiversityDimentionsService {
 
-	public List<String> readExcel() throws IOException, URISyntaxException {
-
-		List<String> urls = new ArrayList<>();
-		URL res = getClass().getClassLoader().getResource("DiversityDimentionsTestData.xlsx");
-		File file = Paths.get(res.toURI()).toFile();
-
-		FileInputStream fileInputStream = new FileInputStream(file);
-		Workbook workbook = new XSSFWorkbook(fileInputStream);
-		Sheet sheet = workbook.getSheetAt(0);
-		for (Row row : sheet) {
-			if (row.getRowNum() > 0) {
-				String companyName = row.getCell(1).getStringCellValue();
-				if (companyName != null && !companyName.isEmpty()) {
-					String url = DiversityDimesionsUtils.getSearchEnggUrlByTerm(companyName);
-					urls.add(url);
-					getNavtigationPages(url);
-				}
-			}
-		}
-		return urls;
-
+	private HashSet<String> links;
+	
+	public DiversityDimentionsService() {
+		links = new HashSet<String>();
 	}
-
-	private void getNavtigationPages(String url) {
+	
+	
+	
+	
+	public List<String> getDiverseLeaders(String fileName) throws IOException {
+		//List<String> customerNames = 	DiversityDimesionsUtils.readExcel( fileName);
+		List<String> customerNames = Arrays.asList("Arista Business Imaging Solutions, Inc.","EXECUTEAM CORPORATION", "Premier Oil & Gas Inc",
+				"Best Capital Funding", "Vista Industrial Packaging, LLC", "Bema Electronic Manufacturing, Inc.",
+				"S&S Quality Meats, LLC");
+		
+		customerNames.forEach(site -> {
+			
+			try {				
+			
+				links = DiversityDimesionsUtils.getUrlsFromGoogle(site);
+				
+				getLeaderNames(links);
+			} catch (IOException e) {
+				
+				e.printStackTrace();
+			}
+			 
+			List<String> leaders = getLeaderNames(links);
+		});
+		return null;
+	}
+	
+	private List<String> getLeaderNames(HashSet<String> links) {
 		try {
-			System.out.println(url);
-			if (!NOT_FOUND.equals(url)) {
-				Document doc = DiversityDimesionsUtils.connectOrgURL(url);
-				Elements leaderShipLinks = doc.select("a:contains(Leadership)");
-				Elements aboutUsLinks = doc.select("a:contains(About Us)");
-				Elements meetOutTeam = doc.select("a:contains(Meet Our Team)");
+			for (String link: links) {
+				if (!NOT_FOUND.equals(link)) {
+					Document doc = DiversityDimesionsUtils.connectOrgURL(link);
+					
+					Elements leadershipLinks = doc.select("a:contains(Leadership)");
+					Elements aboutUsLink = doc.select("a:contains(About)");
+					
+					
+					Elements meetOutTeam = doc.select("a:contains(Meet Our Team)");
+										
+					if (aboutUsLink != null ) {
+						  String aboutPage = aboutUsLink.attr("href"); 
+						  Document aboutDoc = DiversityDimesionsUtils.connectOrgURL(link+aboutPage); 
 
-				if (leaderShipLinks != null && leaderShipLinks.first() != null) {
-					System.out.println(leaderShipLinks.attr("href"));
-					String leadPage = leaderShipLinks.attr("href");
-					Document doc1 = DiversityDimesionsUtils.connectOrgURL(leadPage);
-					Elements leaderShipcontent = doc1.select("div");
+						  for (String leaderType: DiversityDimensionConstants.LEADER_TYPES) {
+							  if ( doc.select("span").contains(leaderType)) {
+							  }
+							  
+						  }
+						  
+					}
+						 
+
+					 
 				}
 			}
-			return;
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
+		return null;
 	}
+	
 }
+
